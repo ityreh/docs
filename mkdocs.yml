@@ -1,4 +1,9 @@
 site_name: ityreh
 
+nav:
+  - Home: index.md
+  - Starter: starter.md
+  - About: about.md
+
 theme:
   name: material
