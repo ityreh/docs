@@ -19,12 +19,15 @@ jobs:
         with:
           repository: ityreh/mkdocs
           path: mkdocs
-          
       - uses: actions/checkout@v2
         with:
           repository: ityreh/ityreh.github.io
           path: docs
-
+      # install required tools
+      - name: Pip Installer
+        uses: BSFishy/pip-action@v1
+        with:
+          packages: mkdocs-material
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: mkdocs gh-deploy --config-file ../mkdocs/mkdocs.yml --remote-branch main
