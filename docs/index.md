@@ -1,17 +1,19 @@
-# Documentation for ityreh
+# Wikityreh
 
-This documenation page is...
+This Wiki is a starting point for software development projects and one of my electronic memories.
 
-## Commands
+## Basic hints for Software Development
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+This is a list of methods and paradigms that help me getting better in software development.
 
-## Project layout
+### Setup a mouseless development environment
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+To setup my mouseless development environment I followed [this book](https://themouseless.dev/) by [Matthieu Cneude](https://github.com/Phantas0s) and I really recommend it. The mouseless development environment is about using the mouse as less as possible to feel more comfortable and be more productive as a developer. You will see what I mean when you start using this approach in your daily development.
+
+### Follow the 12 factor app guide
+
+[The 12 factor app guide](https://12factor.net/) is a really good list of methodologies building software.
+
+### Clean Code
+
+Source code is read much more often than it is written, so it is important to keep the code clean. What this means is explained by Robert C. Martin in his book Clean Code.
