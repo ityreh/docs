@@ -2,6 +2,39 @@
 
 The starters help you kick off into a project so you can get started right away.
 
+## Django
+
+TODO:
+
+- cookiecutter for project layout templating?
+- django-environ?
+
+Initialize your django application in your project folder and change base layout.
+
+    django-admin startproject config
+    mv ./config/manage.py .
+    mv ./config/config/* ./config
+    rm -R ./config/config
+
+Create multiple environment specific settings and requirements files.
+
+    mkdir ./config/settings
+    touch ./config/settings/__init__.py
+    mv ./config/settings.py ./config/settings/base.py
+
+You can create specific settings which imports `base.py`, eg. `local.py`, `staging.py` or `production.py`:
+
+    from .base import *
+
+    ...
+
+[Do the same with your requirements]().
+
+
+Start an app:
+
+    python manage.py startapp <app_name>
+
 ## React Electron
 
 Initialize your react client in your project folder and cd into the client folder.
