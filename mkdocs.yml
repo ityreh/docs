@@ -3,6 +3,10 @@ site_name: ityreh
 nav:
   - Home: index.md
   - Starter: starter.md
+  - VCS: vcs.md
+  - Language: language.md
+  - Database: database.md
+  - Integration: integration.md
   - About: about.md
 
 theme:
