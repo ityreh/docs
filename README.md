@@ -14,7 +14,7 @@ If you want to deploy the documentation manually, you need to install mkdoc-mate
 pip install mkdocs-material
 ```
 
-Then you can execute the deploymentscript:
+Then you can execute the deploymentscript (do not do this inside a used repository):
 
 ```shell
 ./bin/deploy.sh

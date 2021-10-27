@@ -39,6 +39,13 @@ docker run \
 
 ```
 
+When the containers are up and running, you can get the IPAdress of your postgresql server with the following command.
+Use it to connect with your local DB in pgadmin.
+
+```sh
+docker inspect <db-name> -f "{{json .NetworkSettings.Networks }}"
+```
+
 ## MongoDB (no-sql document)
 
 ## Redis (in-memory)
