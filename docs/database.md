@@ -17,25 +17,48 @@ Copy the setup to a script e.g. in a bin folder in your project `bin/setup-local
 #!/bin/sh
 
 # Database
-export DATABASE_DEFAULT_NAME=dev-db
+export DATABASE_DEFAULT_NAME=ecom-dev-db
 export DATABASE_DEFAULT_USER=postgres
-export DATABASE_DEFAULT_PASSWORD=Passw0rd!
-export DATABASE_DEFAULT_HOST=172.17.0.2
+export DATABASE_DEFAULT_PASSWORD=Start123!
+export DATABASE_DEFAULT_HOST=localhost
 export DATABASE_DEFAULT_PORT=5432
 
-docker run \
-    -d --name $DATABASE_DEFAULT_NAME \
+
+postgres_container=$( docker ps -aqf name=ecom-dev-db )
+postgres_container_running=$( docker inspect --format="{{.State.Running}}" ecom-dev-db )
+
+if $postgres_container_running; then
+  echo "Container postgres is running: $postgres_container"
+elif [[ -n "$postgres_container" ]]; then
+  echo "Container postgres is stopped, starting container."
+  docker start $postgres_container
+else
+  echo "Container postgres not exists, creating new container."
+  docker run -d \
+    --name $DATABASE_DEFAULT_NAME \
     -e POSTGRES_PASSWORD=$DATABASE_DEFAULT_PASSWORD \
     -v ${HOME}/postgres-data/:/var/lib/postgresql/data \
     -p $DATABASE_DEFAULT_PORT:$DATABASE_DEFAULT_PORT \
-        $DATABASE_DEFAULT_USER
+    $DATABASE_DEFAULT_USER
+fi
 
-docker run \
+pgadmin_container=$( docker ps -aqf name=pgadmin-dev )
+pgadmin_container_running=$( docker inspect --format="{{.State.Running}}" pgadmin-dev )
+
+if $pgadmin_container_running; then
+  echo "Container pgadmin is running: $pgadmin_container"
+elif [[ -n "$pgadmin_container" ]]; then
+  echo "Container pgadmin is stopped, starting container."
+  docker start $pgadmin_container
+else
+  echo "Container pgadmin not exists, creating new container."
+  docker run \
     -p 80:80 \
     -e 'PGADMIN_DEFAULT_EMAIL=admin@test.local' \
     -e 'PGADMIN_DEFAULT_PASSWORD=Passw0rd!' \
     --name pgadmin-dev \
     -d dpage/pgadmin4
+fi
 
 ```
 
