@@ -11,16 +11,16 @@ docker pull postgresql pgadmin
 mkdir ${home}/postgres-data
 ```
 
-Copy the setup to a script e.g. in a bin folder in your project `bin/setup-local-test.sh`.
+Copy the setup to a script e.g. in a bin folder in your project `bin/setup-local-test.sh` or if you are in a Python project the perfect place is the postactivate script of the virtualenv.
 
 ```sh
 #!/bin/sh
 
 # Database
-export DATABASE_DEFAULT_NAME=ecom-dev-db
+export DATABASE_DEFAULT_NAME=dev-db
 export DATABASE_DEFAULT_USER=postgres
 export DATABASE_DEFAULT_PASSWORD=Passw0rd!
-export DATABASE_DEFAULT_HOST=localhost
+export DATABASE_DEFAULT_HOST=172.17.0.2
 export DATABASE_DEFAULT_PORT=5432
 
 docker run \
