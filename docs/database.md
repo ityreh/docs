@@ -27,7 +27,7 @@ export DATABASE_DEFAULT_PORT=5432
 postgres_container=$( docker ps -aqf name=ecom-dev-db )
 postgres_container_running=$( docker inspect --format="{{.State.Running}}" ecom-dev-db )
 
-if $postgres_container_running; then
+if [[ -n "$postgres_container_running" ]]; then
   echo "Container postgres is running: $postgres_container"
 elif [[ -n "$postgres_container" ]]; then
   echo "Container postgres is stopped, starting container."
@@ -35,9 +35,9 @@ elif [[ -n "$postgres_container" ]]; then
 else
   echo "Container postgres not exists, creating new container."
   docker run -d \
-    --name $DATABASE_DEFAULT_NAME \
-    -e POSTGRES_PASSWORD=$DATABASE_DEFAULT_PASSWORD \
-    -v ${HOME}/postgres-data/:/var/lib/postgresql/data \
+	--name $DATABASE_DEFAULT_NAME \
+	-e POSTGRES_PASSWORD=$DATABASE_DEFAULT_PASSWORD \
+	-v ${HOME}/postgres-data/:/var/lib/postgresql/data \
     -p $DATABASE_DEFAULT_PORT:$DATABASE_DEFAULT_PORT \
     $DATABASE_DEFAULT_USER
 fi
@@ -45,7 +45,7 @@ fi
 pgadmin_container=$( docker ps -aqf name=pgadmin-dev )
 pgadmin_container_running=$( docker inspect --format="{{.State.Running}}" pgadmin-dev )
 
-if $pgadmin_container_running; then
+if [[ -n "$pgadmin_container_running" ]]; then
   echo "Container pgadmin is running: $pgadmin_container"
 elif [[ -n "$pgadmin_container" ]]; then
   echo "Container pgadmin is stopped, starting container."
@@ -59,6 +59,9 @@ else
     --name pgadmin-dev \
     -d dpage/pgadmin4
 fi
+
+db_info=$( docker inspect ecom-dev-db -f "{{json .NetworkSettings.Networks }}" )
+echo $db_info
 
 ```
 
